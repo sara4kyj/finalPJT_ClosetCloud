@@ -12,6 +12,8 @@
 
 ## [팀 구성]
 
+![팀구성도](https://github.com/sara4kyj/finalPJT_ClosetCloud/blob/d1066c3a8ccfcba2eb54f528794250975a2fb117/_document/Untitled.png)
+
 - 팀장 : 이탁형
   - 전반적인 프로젝트 관리(일정, 수행방안 등)
   - 데이터 전처리 및 라벨링
