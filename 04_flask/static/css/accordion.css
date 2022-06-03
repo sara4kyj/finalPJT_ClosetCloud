@@ -1,0 +1,34 @@
+.multi-accordion {
+    border: 1px solid #a1a1a1;
+    border-radius: 10px;
+    padding: .5em .5em 0;
+    overflow: hidden;
+}
+.multi-accordion summary {
+    font-weight: bold;
+    margin: -.5em -.5em 0;
+    padding: .5em;
+    cursor: pointer;
+}
+.multi-accordion details:first-child summary{
+    border-radius: 10px 10px 0 0;
+}
+.multi-accordion details[open] summary {
+    border-bottom: 1px solid #a1a1a1;
+    margin-bottom: .5em;
+    background-color: #6c7ae0;
+}
+.multi-accordion details:not(:first-child)[open] summary {
+    margin-top: .15em;
+    border-top: 1px solid #a1a1a1;
+}
+.multi-accordion details[open] + details > summary {
+    border-top: 1px solid #a1a1a1;
+}
+summary::marker{
+    content: "+ ";
+    font-family: monospace;
+}
+details[open] summary::marker {
+    content: "- ";
+}

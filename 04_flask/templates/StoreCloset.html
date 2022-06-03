@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>판매자 의류 관리 페이지</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="static/images/icons/favicon.png"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/fonts/linearicons-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/vendor/slick/slick.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/vendor/MagnificPopup/magnific-popup.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/css/util.css">
+	<link rel="stylesheet" type="text/css" href="static/css/main.css">
+<!--===============================================================================================-->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+<!--===============================================================================================-->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<!--===============================================================================================-->
+	<script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+<!--===============================================================================================-->
+
+</head>
+<body class="animsition">
+
+	<!-- Header -->
+	<header class="header-v4">
+		<!-- Header desktop -->
+		<div class="container-menu-desktop">
+			<div class="wrap-menu-desktop">
+				<nav class="limiter-menu-desktop container">
+
+					<!-- Logo desktop -->
+					<a href="/Main" class="logo">
+						<img src="static/images/icons/logo.png" alt="IMG-LOGO">
+					</a>
+
+					<!-- Menu desktop -->
+					<div class="menu-desktop">
+						<ul class="main-menu">
+							<li>
+								<a href="/StoreCloset">AI Manager</a>
+							</li>
+
+<!--							<li class="label1" data-label1="hot">-->
+<!--								<a href="/Aicodi">AI Codi</a>-->
+<!--							</li>-->
+						</ul>
+					</div>
+				</nav>
+			</div>
+		</div>
+
+		<!-- Header Mobile -->
+		<div class="wrap-header-mobile">
+			<!-- Logo moblie -->
+			<div class="logo-mobile">
+				<a href="/Main"><img src="static/images/icons/logo.png" alt="IMG-LOGO"></a>
+			</div>
+
+			<!-- Button show menu -->
+			<div class="btn-show-menu-mobile hamburger hamburger--squeeze">
+				<span class="hamburger-box">
+					<span class="hamburger-inner"></span>
+				</span>
+			</div>
+		</div>
+
+		<!-- Menu Mobile -->
+		<div class="menu-mobile">
+			<ul class="main-menu-m">
+				<li>
+					<a href="/StoreCloset">AI Manager</a>
+				</li>
+
+<!--				<li><a href="/Aicodi" class="label1 rs1" data-label1="hot">AI Codi</a></li>-->
+			</ul>
+		</div>
+
+		<!-- Modal Search -->
+		<div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
+			<div class="container-search-header">
+				<button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
+					<img src="static/images/icons/icon-close2.png" alt="CLOSE">
+				</button>
+
+				<form class="wrap-search-header flex-w p-l-15">
+					<button class="flex-c-m trans-04">
+						<i class="zmdi zmdi-search"></i>
+					</button>
+					<input class="plh3" type="text" name="search" placeholder="Search...">
+				</form>
+			</div>
+		</div>
+
+	</header>
+
+	<section class="sec-blog bg0 p-t-60 p-b-90">
+		<div class="container">
+			<div class="p-b-66">
+				<h3 class="ltext-105 cl5 txt-center respon1">
+					Store Closet
+				</h3>
+			</div>
+
+			<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
+				<a><br>
+				<br></a>
+			</div>
+
+			<!-- 버튼 생성 -->
+			<div class="flex-w flex-sb p-b-52">
+
+				<!-- 전체, 상의, 하의, 원피스, 아우터 분류 버튼-->
+				<div class="flex-l-m flex-g1 filter-tope-group m-tb-10">
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
+						All
+					</button>
+
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".Outer">
+						Outer
+					</button>
+
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".Top">
+						Top
+					</button>
+
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".Bottom">
+						Bottom
+					</button>
+
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".One-Piece">
+						One-Piece
+					</button>
+				</div>
+
+				<!-- filter, search, 옷 추가 버튼 -->
+				<div class="flex-r-m flex-w m-tb-10">
+					<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
+						<i class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"></i>
+						<i class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+						 Filter
+					</div>
+
+					<div class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 m-r-8 js-show-search">
+						<i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
+						<i class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+						Search
+					</div>
+
+					<form action="/productDetail">
+						<button type="submit" class="btn flex-c-m stext-106k size-104 bor4 pointer hov-btn4 trans-04 m-r-8 m-tb-4">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="m-r-6" viewBox="0 0 16 16">
+							  <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+							</svg>
+							 옷 추가
+						</button>
+					</form>
+
+				</div>
+
+				<!-- Search product -->
+				<div class="dis-none panel-search w-full p-t-10 p-b-15">
+					<div class="bor8 dis-flex p-l-15">
+						<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
+							<i class="zmdi zmdi-search"></i>
+						</button>
+
+						<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
+					</div>
+				</div>
+
+				<!-- Filter -->
+				<div class="dis-none panel-filter w-full p-t-10">
+					<div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
+						<!-- sort by button -->
+						<div class="filter-col1 p-r-15 p-b-27">
+							<div class="mtext-102 cl2 p-b-15">
+								Sort By
+							</div>
+
+							<ul>
+								<li class="p-b-6">
+									<a href="#" class="filter-link stext-106 trans-04">
+										Default
+									</a>
+								</li>
+							</ul>
+						</div>
+
+						<!-- season button -->
+						<div class="filter-col3 filter-panel-group p-r-15 p-b-27">
+							<div class="mtext-102 cl2 p-b-15">
+								Season
+							</div>
+
+							<ul>
+								{% for uniq_season in unique_season %}
+								<li class="p-b-6">
+									<button class="filter-link stext-106k trans-04" data-filter=".{{uniq_season}}">{{uniq_season}}</button>
+								</li>
+								{% endfor %}
+							</ul>
+						</div>
+
+						<!-- color button -->
+						<div class="filter-col3 filter-panel-group p-r-15 p-b-27">
+							<div class="mtext-102 cl2 p-b-15">
+								Color
+							</div>
+
+							<ul>
+								{% for uniq_hex in color_hex %}
+								<li class="p-b-6">
+									<span class="fs-15 lh-12 m-r-6" style="color: {{uniq_hex}};"><i class="zmdi zmdi-circle"></i></span>
+									<button class="filter-link stext-106k trans-04" data-filter=".{{unique_color[loop.index0]}}">{{unique_color[loop.index0]}}</button>
+								</li>
+								{% endfor %}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- 사용자 데이터 보여주기	-->
+			<div class="row isotope-grid">
+			{% for image in fname %}
+
+				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item {{cloth_cat[loop.index0]}} {{color[loop.index0]}} {{season[loop.index0]}}">
+					<!-- Block2 -->
+					<div class="block2">
+						<div class="block2-pic hov-img0">
+							<img src="static/images/cloths/{{image}}" alt="IMG-PRODUCT">
+
+							<a href="#" class="block2-btn flex-c-m stext-103k cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal{{loop.index}}">
+								옷 확인
+							</a>
+						</div>
+
+						<div class="block2-txt flex-w flex-t p-t-14">
+							<div class="block2-txt-child1 flex-col-l ">
+								<a class="stext-104k cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+
+								</a>
+							</div>
+
+							<div class="block2-txt-child2 flex-r p-t-3">
+								<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+									<img class="icon-heart1 dis-block trans-04" src="static/images/icons/icon-heart-01.png" alt="ICON">
+									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="static/images/icons/icon-heart-02.png" alt="ICON">
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<!-- Modal -->
+					<div class="wrap-modal js-modal{{loop.index}} p-t-60 p-b-20">
+						<div class="overlay-modal js-hide-modal{{loop.index}}"></div>
+
+						<div class="container">
+							<div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
+								<button class="how-pos3 hov3 trans-04 js-hide-modal{{loop.index}}">
+									<img src="static/images/icons/icon-close.png" alt="CLOSE">
+								</button>
+
+								<div class="row">
+									<div class="col-md-6 col-lg-7 p-b-30">
+										<div class="p-l-25 p-r-30 p-lr-0-lg">
+											<div class="wrap-slick3 flex-sb flex-w">
+												<div class="slick3 gallery-lb">
+													<div class="item-slick3" data-thumb="static/images/cloths/{{image}}">
+														<div class="wrap-pic-w pos-relative">
+															<img src="static/images/cloths/{{image}}" alt="IMG">
+
+															<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="static/images/cloths/{{image}}">
+																<i class="fa fa-expand"></i>
+															</a>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-md-6 col-lg-5 p-b-30">
+										<div class="p-r-50 p-t-5 p-lr-0-lg">
+											<h4 class="mtext-105k cl2 js-name-detail p-b-14">
+												옷장에 저장된 정보 수정하기
+											</h4>
+
+											<div class="p-t-33">
+												<div class="flex-w flex-r-m p-b-10">
+													<div class="size-203 flex-c-m respon70">
+														Categories
+													</div>
+
+													<div class="size-204 respon70-next">
+														<div class="rs1-select2 bor8 bg0">
+															<select class="js-select2 stext-104k" name="cloth_cat" id="cloth_cat{{loop.index0}}" value="cloth_cat">
+																<option style="color: #c9c9c9">{{cloth_cat[loop.index0]}}</option>
+																<option>Outer</option>
+																<option>Top</option>
+																<option>Bottom</option>
+																<option>One-Piece</option>
+															</select>
+															<div class="dropDownSelect2"></div>
+														</div>
+													</div>
+												</div>
+
+												<div class="flex-w flex-r-m p-b-10">
+													<div class="size-203 flex-c-m respon70">
+														Color
+													</div>
+														<div class="size-204 respon70-next">
+															<div class="rs1-select2 bor8 bg0">
+																<select class="js-select2 stext-104k" name="color_cat" id="color_cat{{loop.index0}}" value="color_cat">
+																	<option style="color: #c9c9c9" >{{color[loop.index0]}}</option>
+																	<option>화이트</option>
+																	<option>그레이</option>
+																	<option>블랙</option>
+																	<option>베이지</option>
+																	<option>브라운</option>
+																	<option>네이비</option>
+																	<option>블루</option>
+																	<option>스카이블루</option>
+																	<option>핑크</option>
+																	<option>라벤더</option>
+																	<option>퍼플</option>
+																	<option>와인</option>
+																	<option>카키</option>
+																	<option>민트</option>
+																	<option>그린</option>
+																	<option>와인</option>
+																	<option>레드</option>
+																	<option>오렌지</option>
+																	<option>옐로우</option>
+																	<option>실버</option>
+																	<option>골드</option>
+																	<option>네온</option>
+																</select>
+																<div class="dropDownSelect2"></div>
+														</div>
+													</div>
+												</div>
+
+												<div class="flex-w flex-r-m p-b-10">
+													<div class="size-203 flex-c-m respon70">
+														Season
+													</div>
+
+													<div class="size-204 respon70-next">
+														<label class="add-cloth-button stext-104k">
+															<input type="radio" name="season{{loop.index0}}" id="season{{loop.index0}}" value="봄" style="display:none" />
+															<span class="add-cloth-onoff-switch">봄</span>
+														</label>
+														<label class="add-cloth-button stext-104k">
+															<input type="radio" name="season{{loop.index0}}" id="season{{loop.index0}}" value="여름" style="display:none" />
+															<span class="add-cloth-onoff-switch">여름</span>
+														</label>
+														<label class="add-cloth-button stext-104k">
+															<input type="radio" name="season{{loop.index0}}" id="season{{loop.index0}}" value="가을" style="display:none" />
+															<span class="add-cloth-onoff-switch">가을</span>
+														</label>
+														<label class="add-cloth-button stext-104k">
+															<input type="radio" name="season{{loop.index0}}" id="season{{loop.index0}}" value="겨울" style="display:none" />
+															<span class="add-cloth-onoff-switch">겨울</span>
+														</label>
+													</div>
+												</div>
+
+												<div class="flex-r-m p-b-10">
+													<div class="size-203 flex-c-m respon70">
+														Favor
+													</div>
+
+													<div class="size-204 respon70-next">
+														<label class="add-cloth-button stext-104k">
+															<input type="radio" name="favor{{loop.index0}}" id="favor" value="1" style="display:none" />
+															<span class="add-cloth-onoff-switch">1</span>
+														</label>
+														<label class="add-cloth-button stext-104k">
+															<input type="radio" name="favor{{loop.index0}}" id="favor" value="2" style="display:none" />
+															<span class="add-cloth-onoff-switch">2</span>
+														</label>
+														<label class="add-cloth-button stext-104k">
+															<input type="radio" name="favor{{loop.index0}}" id="favor" value="3" style="display:none" />
+															<span class="add-cloth-onoff-switch">3</span>
+														</label>
+														<label class="add-cloth-button stext-104k">
+															<input type="radio" name="favor{{loop.index0}}" id="favor" value="4" style="display:none" />
+															<span class="add-cloth-onoff-switch">4</span>
+														</label>
+														<label class="add-cloth-button stext-104k">
+															<input type="radio" name="favor{{loop.index0}}" id="favor" value="5" style="display:none" />
+															<span class="add-cloth-onoff-switch">5</span>
+														</label>
+													</div>
+												</div>
+
+												<div class="input-group flex-w flex-r-m p-b-10">
+													<div class="input-group-prepend size-203 flex-c-m respon70">
+														<span class="input-group-text" id="">Description</span>
+													</div>
+													<input type="text" class="form-control stext-104k plh3 p-lr-18 size-204 respon70-next" style="height: 50px;" placeholder="옷에 대한 부가설명을 입력해주세요" id="Description{{loop.index0}}" name="Description" value="{{description[loop.index0]}}">
+												</div>
+
+												<div class="flex-w flex-r-m p-b-10">
+													<button class="flex-c-m stext-101k cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-modify-detail{{loop.index0}}">
+														저장
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<script>
+					// open modal
+					$('.js-show-modal{{loop.index}}').on('click',function(e{{loop.index}}){
+						e{{loop.index}}.preventDefault();
+						$("input:radio[name='season{{loop.index0}}']:input[value='{{season[loop.index0]}}']").prop('checked', true);
+						$("input:radio[name='favor{{loop.index0}}']:input[value='{{favor[loop.index0]}}']").prop('checked', true);
+						$('.js-modal{{loop.index}}').addClass('show-modal');
+					});
+
+					$('.js-hide-modal{{loop.index}}').on('click',function(){
+						$('.js-modal{{loop.index}}').removeClass('show-modal');
+					});
+
+					// modify data save confirm
+					$().ready(function () {
+						$(".js-modify-detail{{loop.index0}}").click(function () {
+							var cloth_cat = $('#cloth_cat{{loop.index0}}').val();
+							var color_cat = $('#color_cat{{loop.index0}}').val();
+							var Season = $("input:radio[name='season{{loop.index0}}']:checked").val();
+							var Favor = $("input:radio[name='favor{{loop.index0}}']:checked").val();
+							var Description = $('#Description{{loop.index0}}').val();
+
+							var postdata = {
+								'cloth_cat': cloth_cat,
+								'color': color_cat,
+								'season': Season,
+								'favor': Favor,
+								'cost' : cost,
+								'count' : count,
+								'description': Description,
+							}
+
+							Swal.fire({
+								title: '내 상점에 옷 추가하기',
+								icon: 'info',
+								text: "지금 입력한 내용으로 저장하시겠습니까?",
+								showDenyButton: true,
+								confirmButtonText: '저장',
+								denyButtonText: `취소`,
+							})
+							.then((result) => {
+							  if (result.isConfirmed) {
+								  $.ajax({
+									type: 'POST',
+									url: '{{url_for("modifystorecloth")}}',
+									data: JSON.stringify(postdata),
+									dataType : 'JSON',
+									contentType: "application/json",
+									success: function(data){
+										Swal.fire({
+											icon: 'success',
+											title: '수정에 성공했습니다.',
+											text: '확인을 누르시면 내 상점에서 확인가능합니다.',
+										})
+									},
+									error: function(request, status, error){
+										Swal.fire({
+											icon: 'error',
+											title: '저장에 실패했습니다.',
+											text: '혹시 입력하지 않은 칸이 있으신가요?<lr>있으시다면 입력해주세요!',
+										})
+									}
+								  })
+							  }
+							});
+						});
+					});
+
+			</script>
+
+
+				{% endfor %}
+			</div>
+
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer class="bg3 p-t-75 p-b-32">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-lg-3 p-b-50">
+					<h4 class="stext-301 cl0 p-b-30">
+						Categories
+					</h4>
+
+					<ul>
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Women
+							</a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Men
+							</a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Shoes
+							</a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Watches
+							</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="col-sm-6 col-lg-3 p-b-50">
+					<h4 class="stext-301 cl0 p-b-30">
+						Help
+					</h4>
+
+					<ul>
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Track Order
+							</a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Returns
+							</a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Shipping
+							</a>
+						</li>
+
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								FAQs
+							</a>
+						</li>
+					</ul>
+				</div>
+
+				<div class="col-sm-6 col-lg-3 p-b-50">
+					<h4 class="stext-301 cl0 p-b-30">
+						GET IN TOUCH
+					</h4>
+
+					<p class="stext-107 cl7 size-201">
+						Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
+					</p>
+
+					<div class="p-t-27">
+						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+							<i class="fa fa-facebook"></i>
+						</a>
+
+						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+							<i class="fa fa-instagram"></i>
+						</a>
+
+						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+							<i class="fa fa-pinterest-p"></i>
+						</a>
+					</div>
+				</div>
+
+				<div class="col-sm-6 col-lg-3 p-b-50">
+					<h4 class="stext-301 cl0 p-b-30">
+						Newsletter
+					</h4>
+
+					<form>
+						<div class="wrap-input1 w-full p-b-4">
+							<input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email" placeholder="email@example.com">
+							<div class="focus-input1 trans-04"></div>
+						</div>
+
+						<div class="p-t-18">
+							<button class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04">
+								Subscribe
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<div class="p-t-40">
+				<div class="flex-c-m flex-w p-b-18">
+					<a href="#" class="m-all-1">
+						<img src="static/images/icons/icon-pay-01.png" alt="ICON-PAY">
+					</a>
+
+					<a href="#" class="m-all-1">
+						<img src="static/images/icons/icon-pay-02.png" alt="ICON-PAY">
+					</a>
+
+					<a href="#" class="m-all-1">
+						<img src="static/images/icons/icon-pay-03.png" alt="ICON-PAY">
+					</a>
+
+					<a href="#" class="m-all-1">
+						<img src="static/images/icons/icon-pay-04.png" alt="ICON-PAY">
+					</a>
+
+					<a href="#" class="m-all-1">
+						<img src="static/images/icons/icon-pay-05.png" alt="ICON-PAY">
+					</a>
+				</div>
+
+				<p class="stext-107 cl6 txt-center">
+					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> &amp; distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+
+				</p>
+			</div>
+		</div>
+	</footer>
+
+
+	<!-- Back to top -->
+	<div class="btn-back-to-top" id="myBtn">
+		<span class="symbol-btn-back-to-top">
+			<i class="zmdi zmdi-chevron-up"></i>
+		</span>
+	</div>
+
+
+
+<!--====== add button confirm ===================================================================================-->
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+<script type="text/javascript">
+	var alert = function(msg, type) {
+		swal({
+			title : '',
+			text : msg,
+			type : type,
+			timer : 1500,
+			customClass : 'sweet-size',
+			showConfirmButton : false
+		});
+	}
+
+</script>
+<!--===============================================================================================-->
+	<script src="static/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="static/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="static/vendor/bootstrap/js/popper.js"></script>
+	<script src="static/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="static/vendor/select2/select2.min.js"></script>
+	<script>
+		$(".js-select2").each(function(){
+			$(this).select2({
+				minimumResultsForSearch: 20,
+				dropdownParent: $(this).next('.dropDownSelect2')
+			});
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="static/vendor/daterangepicker/moment.min.js"></script>
+	<script src="static/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="static/vendor/slick/slick.min.js"></script>
+	<script src="static/js/slick-custom.js"></script>
+<!--===============================================================================================-->
+	<script src="static/vendor/parallax100/parallax100.js"></script>
+	<script>
+        $('.parallax100').parallax100();
+	</script>
+<!--===============================================================================================-->
+	<script src="static/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+	<script>
+		$('.gallery-lb').each(function() { // the containers for all your galleries
+			$(this).magnificPopup({
+		        delegate: 'a', // the selector for gallery item
+		        type: 'image',
+		        gallery: {
+		        	enabled:true
+		        },
+		        mainClass: 'mfp-fade'
+		    });
+		});
+	</script>
+<!--===============================================================================================-->
+	<script src="static/vendor/isotope/isotope.pkgd.min.js"></script>
+<!--===============================================================================================-->
+	<script src="static/vendor/sweetalert/sweetalert.min.js"></script>
+	<script>
+		$('.js-addwish-b2').on('click', function(e){
+			e.preventDefault();
+		});
+
+		$('.js-addwish-b2').each(function(){
+			var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+			$(this).on('click', function(){
+				swal(nameProduct, "is added to wishlist !", "success");
+
+				$(this).addClass('js-addedwish-b2');
+				$(this).off('click');
+			});
+		});
+
+		$('.js-addwish-detail').each(function(){
+			var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
+
+			$(this).on('click', function(){
+				swal(nameProduct, "is added to wishlist !", "success");
+
+				$(this).addClass('js-addedwish-detail');
+				$(this).off('click');
+			});
+		});
+
+		/*---------------------------------------------*/
+
+		$('.js-addcart-detail').each(function(){
+			var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
+			$(this).on('click', function(){
+				swal(nameProduct, "저장을 완료했습니다.", "success");
+			});
+		});
+
+	</script>
+<!--===============================================================================================-->
+	<script src="static/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<script>
+		$('.js-pscroll').each(function(){
+			$(this).css('position','relative');
+			$(this).css('overflow','hidden');
+			var ps = new PerfectScrollbar(this, {
+				wheelSpeed: 1,
+				scrollingThreshold: 1000,
+				wheelPropagation: false,
+			});
+
+			$(window).on('resize', function(){
+				ps.update();
+			})
+		});
+	</script>
+<!--===============================================================================================-->
+	<script src="static/js/main.js"></script>
+
+
+</body>
+</html>
