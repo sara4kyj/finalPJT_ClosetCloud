@@ -2250,6 +2250,7 @@ input.num-product::-webkit-inner-spin-button {
 .cl11 {color: #f9ba48;}
 .cl12 {color: #ccc;}
 .cl13 {color: #E2E0F8;}
+.cl14 {color: #3B1E1E;}
 
 /*//////////////////////////////////////////////////////////////////
 [ S-Text 0 - 15 ]*/
@@ -2816,7 +2817,7 @@ input.num-product::-webkit-inner-spin-button {
 .bg7 {background-color: #333;}
 .bg8 {background-color: #f3f3f3;}
 .bg9 {background-color: rgba(255,255,255,0.9);}
-
+.bg10 {background-color: #FAE100;}
 /*---------------------------------------------*/
 .bg-overlay1::before {
   content: "";
@@ -3259,6 +3260,12 @@ input.num-product::-webkit-inner-spin-button {
   border-color: #fff;
   background-color: #fff;
   color: #717fe0;
+}
+/*---------------------------------------------*/
+.hov-kakaobtn:hover {
+  border-color: #fff;
+  background-color: #fff;
+  color: #3B1E1E;
 }
 /*---------------------------------------------*/
 .hov-tab2:hover {

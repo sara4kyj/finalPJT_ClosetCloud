@@ -6,7 +6,7 @@ from keras.models import load_model
 from flask import Flask, render_template, request, jsonify
 from cloth_image_preprocessing import image_preprocess
 from werkzeug.utils import secure_filename
-from recommend import select_condition, select_temperature, select_style, create_user_faver, pre_processing_adjmatrix, return_user_temp, make_adj_matrix, compute_cos_similarity, make_recommend_list, return_match_user_data
+from recommend import *
 from datetime import datetime
 import pyautogui
 from otherFunc import return_hex
@@ -21,6 +21,10 @@ def Main():  # 경로에 대한 요청이 있을 때 실행될 함수 정의
 @app.route('/Aicodi')
 def Aicodi():
     return render_template('Aicodi.html')
+
+@app.route('/SignUp')
+def SignUp():
+    return render_template('SignUp.html')
 
 @app.route('/productDetail')
 def productDetail():
@@ -187,27 +191,23 @@ def recommend():
         # 추천해주기
         pyautogui.PAUSE = 15
         user = pd.read_pickle('./static/data/user.pkl')
-        # select_data = create_user_faver(select_data, user)
+        select_data = create_user_faver(select_data, user)
         select_data = pre_processing_adjmatrix(select_data)
         adj_matrix = make_adj_matrix(select_data)
 
         recommend_data = make_recommend_list(adj_matrix, select_data)
 
         # 추천리스트와 사용자 비교하여 보여주기
-        pyautogui.PAUSE = 2
-        match_list, match_fail_list = return_match_user_data(recommend_data, user)
+        pyautogui.PAUSE = 5
+        match_df, match_fail_df = final_recommend_df(recommend_data, user, data)
 
-        # fileID_onCloset = data[data.fileID.isin(match_list)]
-        # fileID_onCloset_path_list = [f'cloths/{fname}' for fname in user.sort_values("favor", ascending=False).fileID_onCloset[:3]]
-        # fileID_onStore = data[data.fileID.isin(match_fail_list)].drop_duplicates('fileID')
-        # fileID_onStore_path_list = [f'store/fname' for f, st, sy in zip(fileID_onStore["fileID"], fileID_onOhter["situation"],fileID_onOhter["style"])]
-        fileID_onCloset_path_list=[]
-        fileID_onStore_path_list=[]
-
+        fileID_onCloset_path_list = [f'cloths/{str(user[(user.cloth_cat==mtcat)&(user.color==mtcolor)].fname.unique()[0])}' for mtcat, mtcolor in zip(match_df.cloth_cat, match_df.color)]
+        # fileID_onStore_path_list = [f'cloths/store/{str(store[(store.cloth_cat==mtcat)&(store.color==mtcolor)].fname.unique()[0])'
+        #                             for mtcat, mtcolor in zip(match_fail_df.cloth_cat, match_fail_df.color)]
 
         return render_template('recommendMatch.html',
-                                fileID_onCloset_path_list=fileID_onCloset_path_list,
-                                fileID_onStore_path_list=fileID_onStore_path_list)
+                                fileID_onCloset_path_list=fileID_onCloset_path_list[:3],
+                                fileID_onStore_path_list=fileID_onCloset_path_list)
 
 
 if __name__ != '__main__':

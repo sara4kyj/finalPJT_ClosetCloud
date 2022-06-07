@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Cloth Detail Add</title>
+	<title>Sign Up</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!--===============================================================================================-->
 	<link rel="icon" type="image/png" href="static/images/icons/favicon.png"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="static/vendor/bootstrap/css/bootstrap.min.css">
@@ -16,13 +17,13 @@
 	<link rel="stylesheet" type="text/css" href="static/fonts/linearicons-v1.0.0/icon-font.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="static/vendor/animate/animate.css">
-<!--===============================================================================================-->	
+<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="static/vendor/css-hamburgers/hamburgers.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="static/vendor/animsition/css/animsition.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="static/vendor/select2/select2.min.css">
-<!--===============================================================================================-->	
+<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="static/vendor/daterangepicker/daterangepicker.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="static/vendor/slick/slick.css">
@@ -31,16 +32,18 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="static/vendor/perfect-scrollbar/perfect-scrollbar.css">
 <!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="static/css/util.css">
+	<link rel="stylesheet" type="text/css" href="static/css/main.css">
+<!--===============================================================================================-->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="static/css/util.css">
-	<link rel="stylesheet" type="text/css" href="static/css/main.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<link rel="stylesheet" href="static/css/accordion.css">
 	<link rel="stylesheet" href="static/css/style.css">
 <!--===============================================================================================-->
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<!--===============================================================================================-->
+
 </head>
 <body class="animsition">
 
@@ -70,11 +73,7 @@
 					</div>
 
 					<div class="wrap-icon-header flex-w flex-r-m">
-						<a href="#" class="icon-header-item cl0 hov-cl1 trans-04 p-l-22 p-r-11">
-							<i class="zmdi zmdi-account-add"></i>
-						</a>
-
-						<a href="#" class="icon-header-item cl0 hov-cl1 trans-04 p-l-22 p-r-11">
+						<a href="/SignUp" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
 							<i class="zmdi zmdi-account-o"></i>
 						</a>
 					</div>
@@ -90,11 +89,7 @@
 			</div>
 
 			<div class="wrap-icon-header flex-w flex-r-m m-r-15">
-				<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10">
-					<i class="zmdi zmdi-account-add"></i>
-				</a>
-
-				<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10">
+				<a href="/SignUp" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10">
 					<i class="zmdi zmdi-account-o"></i>
 				</a>
 			</div>
@@ -123,48 +118,78 @@
 	</header>
 
 
-
-
-	<!-- Product Detail -->
 	<section class="sec-blog bg0 p-t-60 p-b-90">
 		<div class="container">
 			<div class="p-b-66">
 				<h3 class="ltext-105 cl5 txt-center respon1">
-					ADD
+					Sign Up
 				</h3>
 			</div>
 
-			<form action="/productDetail_upload" method="POST" enctype="multipart/form-data">
-				<div style="margin: 0 15% 0 15%;">
-					<div class="mt-3 container file-upload">
-						<div class="image-upload-wrap">
-							<input class="file-upload-input" type='file' name="file" onchange="readURL(this);" accept="image/*" />
-							<div class="drag-text">
-								<img src="static/images/icons/upload.png" class="mt-5 pt-5 upload">
-								<h3 class="mb-5 pb-5 pt-4 upload-text">의류 사진을 올려놓거나<br>눌러서 업로드하세요!</h3>
-							</div>
-						</div>
-						<div class="file-upload-content">
-							<img class="file-upload-image" id="cloth-image" src="#" alt="your image" />
-							<div id="loading" class="animated bounce">
-								<div class="spinner-border" role="status">
-									<span class="sr-only">Loading...</span>
-								</div>
-							</div>
-							<p class="result-message"><br></p>
-							<div id="label-container" class="d-flex flex-column justify-content-around"></div>
-							<div id="addThis" class="addthis_inline_share_toolbox_6lz1"></div>
+			<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
+				<a><br>
+				<br></a>
+			</div>
 
-							<div class="flex-c-m p-t-18 image-title-wrap" id="sub">
-								<button class="flex-c-m stext-101k cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04" type="submit" id="alertStart">분석 확인</button>
-							</div>
-						</div>
-					</div>
-					<p class="center mtext-102k cl6 bor3 m-tb-5">(참고)깔끔한 배경에서 찍은 이미지를 사용하면 더 정확해요!😉</p>
+
+			<div class="flex-w flex-sb-m p-b-52" style="flex-direction: column;">
+				<div class="tab_rec flex-c-m m-tb-10" style="margin:0 auto;">
+					<button class="tablinks_rec active cl6 hov-tab2 bor3 trans-04 m-r-32 m-tb-5 how-active1" onclick="openTab(event, 'tab1')">
+						개인 사용자
+					</button>
+
+					<button class="tablinks_rec cl6 hov-tab2 bor3 trans-04 m-r-32 m-tb-5" onclick="openTab(event, 'tab2')">
+						소상공인
+					</button>
 				</div>
-			</form>
+			</div>
+
+			<div id="tab1" class="tabcontent" style="display: block; margin:0 auto;">
+
+				<div class="row recommend_image" style="margin:0 auto;">
+					<ul>
+
+						<div class="p-t-18">
+							<button class="flex-c-m stext-101k cl14 size-103 bg10 hov-kakaobtn p-lr-15 trans-04" onclick="kakaoLogin();">
+								<img class="size-108" src="static/images/icons/kakao.png" alt="ICON">
+								카카오계정으로 로그인
+							</button>
+						</div>
+
+						<!-- 추후 주석 처리하거나 필요한 곳으로 이동 -->
+						<li onclick="kakaoLogout();">
+						  <a href="javascript:void(0)">
+							  <span>카카오 로그아웃</span>
+						  </a>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+
+			<div id="tab2" class="tabcontent" style="display: none; margin:0 auto;">
+
+				<div class="row recommend_image" style="margin:0 auto;">
+
+				</div>
+
+			</div>
 		</div>
 	</section>
+
+
+
+	<!-- Banner -->
+	<div class="sec-banner bg0 p-t-80 p-b-50">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
+					<a><br>
+					<br></a>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 	<!-- Footer -->
@@ -217,7 +242,7 @@
 
 						<li class="p-b-10">
 							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								Returns 
+								Returns
 							</a>
 						</li>
 
@@ -304,83 +329,95 @@
 
 				<p class="stext-107 cl6 txt-center">
 					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-					Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> &amp; distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
-					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> &amp; distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+
 				</p>
 			</div>
 		</div>
 	</footer>
 
-<!--===============================================================================================-->
-<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<!--=====사업자 번호 진위 확인인=================================================================================-->
+	<script>
 
-<script>
-	$().ready(function () {
-		$("#alertStart").click(function () {
-			Swal.fire({
-				icon: 'info',
-				title: '잠시만 기다려주세요.',
-				text: 'AI가 당신의 의류를 분석중입니다.',
-				showConfirmButton : false,
-			});
+		var data = {
+			"b_no": ["xxxxxxx"] // 사업자번호 "xxxxxxx" 로 조회 시,
+		   };
+
+		$.ajax({
+		  url: "https://api.odcloud.kr/api/nts-businessman/v1/status?serviceKey=xxxxxx",  // serviceKey 값을 xxxxxx에 입력
+		  type: "POST",
+		  data: JSON.stringify(data), // json 을 string으로 변환하여 전송
+		  dataType: "JSON",
+		  contentType: "application/json",
+		  accept: "application/json",
+		  success: function(result) {
+			  console.log(result);
+		  },
+		  error: function(result) {
+			  console.log(result.responseText); //responseText의 에러메세지 확인
+		  }
 		});
-	});
-</script>
 
-<!--===============================================================================================-->
+	</script>
 
+<!--=====카카오 회원가입==================================================================================-->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    $('.image-upload-wrap').hide();
-                    $('#loading').show();
-                    $('.file-upload-image').attr('src', e.target.result);
-                    $('.file-upload-content').show();
-                    $('.image-title').html(input.files[0].name);
-                };
-                reader.readAsDataURL(input.files[0]);
-                init().then(function() {
-                    console.log("hello");
-                    predict();
-                    $('#loading').hide();
-                });
-            }else {
-                removeUpload();
-            }
-        }
-
-        function removeUpload() {
-            $('.file-upload-input').replaceWith($('.file-upload-input').clone());
-            $('.file-upload-content').hide();
-            $('.image-upload-wrap').show();
-        }
-        $('.image-upload-wrap').bind('dragover', function() {
-            $('.image-upload-wrap').addClass('image-dropping');
-        });
-        $('.image-upload-wrap').bind('dragleave', function() {
-            $('.image-upload-wrap').removeClass('image-dropping');
-        });
-</script>
-<script>
-	function getClothData(input){
-		if (input.files && input.files[0]) {
-				input.action="/productDetail_upload";
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    $('.image-upload-wrap').hide();
-                    $('#loading').show();
-                    $('.file-upload-image').attr('src', e.target.result);
-                    $('.file-upload-content').show();
-                    $('.image-title').html(input.files[0].name);
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
+	Kakao.init('ff8f06cc22daaa108c4338bcc2c8635b'); //발급받은 키 중 javascript키를 사용해준다.
+	console.log(Kakao.isInitialized()); // sdk초기화여부판단
+	//카카오로그인
+	function kakaoLogin() {
+		Kakao.Auth.login({
+		  success: function (response) {
+			Kakao.API.request({
+			  url: '/v2/user/me',
+			  success: function (response) {
+				  console.log(response)
+			  },
+			  fail: function (error) {
+				console.log(error)
+			  },
+			})
+		  },
+		  fail: function (error) {
+			console.log(error)
+		  },
+		})
+	  }
+	//카카오로그아웃
+	function kakaoLogout() {
+		if (Kakao.Auth.getAccessToken()) {
+		  Kakao.API.request({
+			url: '/v1/user/unlink',
+			success: function (response) {
+				console.log(response)
+			},
+			fail: function (error) {
+			  console.log(error)
+			},
+		  })
+		  Kakao.Auth.setAccessToken(undefined)
 		}
+	  }
 </script>
-<!--===============================================================================================-->	
+<!--=====탭 기능 구현==================================================================================-->
+	<script>
+	function openTab(evt, tabName) {
+		  var i, tabcontent, tablinks;
+		  tabcontent = document.getElementsByClassName("tabcontent");
+		  for (i = 0; i < tabcontent.length; i++) {
+			tabcontent[i].style.display = "none";
+		  }
+		  tablinks = document.getElementsByClassName("tablinks_rec");
+		  for (i = 0; i < tablinks.length; i++) {
+			tablinks[i].className = tablinks[i].className.replace(" active", "");
+		  }
+		  document.getElementById(tabName).style.display = "block";
+		  evt.currentTarget.className += " active";
+	}
+	</script>
+<!--===============================================================================================-->
 	<script src="static/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
 	<script src="static/vendor/animsition/js/animsition.min.js"></script>
@@ -427,7 +464,7 @@
 <!--===============================================================================================-->
 	<script src="static/vendor/sweetalert/sweetalert.min.js"></script>
 	<script>
-		$('.js-addwish-b2, .js-addwish-detail').on('click', function(e){
+		$('.js-addwish-b2').on('click', function(e){
 			e.preventDefault();
 		});
 
@@ -460,7 +497,7 @@
 				swal(nameProduct, "is added to cart !", "success");
 			});
 		});
-	
+
 	</script>
 <!--===============================================================================================-->
 	<script src="static/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
@@ -481,6 +518,7 @@
 	</script>
 <!--===============================================================================================-->
 	<script src="static/js/main.js"></script>
+	<script type="text/javascript" src="static/js/accordion.js"></script>
 
 </body>
 </html>

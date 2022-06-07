@@ -24,35 +24,35 @@ def select_condition(data, select_situation):
 def select_temperature(data, temperature):
     if temperature < 5:
         fabric_list = ['가죽', '울캐시미어', '니트', '퍼', '패딩', '벨벳', '코듀로이','플리스', '무스탕', '자카드', '데님','스웨이드','헤어']
-        cloth_cat_list = ['상의', '하의','아우터', '원피스']
-        arm_length_list = ['긴팔',None]    
+        cloth_cat_list = ['Top', 'Bottom','Outer', 'One-Piece']
+        arm_length_list = ['긴팔',None]
     elif temperature in range(5,9):
         fabric_list = ['데님', '니트', '스웨이드', '플리스', '트위드','울캐시미어','퍼', '벨벳', '스웨이드','코듀로이','헤어']
-        cloth_cat_list = ['상의', '하의','아우터', '원피스']
+        cloth_cat_list = ['Top', 'Bottom','Outer', 'One-Piece']
         arm_length_list = ['긴팔',None]
     elif temperature in range(9,12):
         fabric_list = ['우븐', '가죽', '데님', '니트', '벨벳', '스웨이드','코듀로이','트위드','헤어']
-        cloth_cat_list = ['상의', '하의','아우터', '원피스']
+        cloth_cat_list = ['Top', 'Bottom','Outer', 'One-Piece']
         arm_length_list = ['긴팔',None]
     elif temperature in range(12,17):
         fabric_list = ['우븐', '데님', '시폰', '레이스', '실크', '니트','시폰']
-        cloth_cat_list = ['상의', '하의','아우터', '원피스']
+        cloth_cat_list = ['Top', 'Bottom','Outer', 'One-Piece']
         arm_length_list = ['긴팔',None]
     elif temperature in range(17,20):
         fabric_list = ['우븐', '가죽', '데님', '네오프렌','실크','시폰']
-        cloth_cat_list = ['상의', '하의','아우터', '원피스']
+        cloth_cat_list = ['Top', 'Bottom','Outer', 'One-Piece']
         arm_length_list = ['7부소매','긴팔','반팔',None]
     elif temperature in range(20,23):
         fabric_list = ['린넨', '데님','시폰']
-        cloth_cat_list = ['상의', '하의','아우터', '원피스']
+        cloth_cat_list = ['Top', 'Bottom','Outer', 'One-Piece']
         arm_length_list = ['7부소매','긴팔','반팔',None]
     elif temperature in range(23,28):
         fabric_list = ['린넨', '데님','메시','스판덱스']
-        cloth_cat_list = ['상의', '하의', '원피스']
+        cloth_cat_list = ['Top', 'Bottom', 'One-Piece']
         arm_length_list = ['민소매','반팔','캡',None]
     elif temperature >= 28:
         fabric_list = ['린넨', '데님','메시','스판덱스']
-        cloth_cat_list = ['상의', '하의', '원피스']
+        cloth_cat_list = ['Top', 'Bottom', 'One-Piece']
         arm_length_list = ['민소매','반팔','캡',None]
     else:
         print('잘못된 온도를 입력하셨습니다. 다시 입력해주세요.')
@@ -132,28 +132,28 @@ def select_style(data, select_style_list, select_situation):
 
     # 키워드 점수를 원본데이터와 merge
     data = pd.merge(left=data, right=style_select_metrix, how="inner", on="fileID")
-    
+
     # 최종적으로 사용할 컬럼만 반영하여 반환
     return data.loc[:, ['fileID', 'situation', 'style', 'cloth_cat', 'color', 'score', 'clothID']]
 
 # 사용자 선호도 반영한 데이터셋 반환하는 함수
 def create_user_faver(data, user_data):
     for user_cloth, user_color, user_score in zip(user_data.cloth_cat, user_data.color, user_data.favor):
-        data.loc[((data.cloth_cat == user_cloth) & (data.color == user_color)), 'score'] += user_score
+        data.loc[((data.cloth_cat == user_cloth) & (data.color == user_color)), 'score'] += int(user_score)
     return data
 
 def pre_processing_adjmatrix(data):
     # fileID별 중복이름(cloth_cat 다름) 제거를 위해 index 재설정
     df_name = pd.DataFrame(data.fileID.unique(), columns=['fileID'])
     df_name.reset_index(inplace=True)
-    data = pd.merge(left=data , right=df_name, how="inner", on="fileID")
-    
+    data = pd.merge(left=data, right=df_name, how="inner", on="fileID")
+
     # array 위치값으로 사용하기 위한 clothID index 재설정
     i = 0
     for id in data.clothID.unique():
         data.loc[data.clothID==id, 'clothID'] = i
         i+=1
-    
+
     return data.loc[:, ['fileID', 'situation', 'style', 'cloth_cat', 'color', 'score', 'index', 'clothID']]
 
 # 사용자 데이터 중 선택된 온도에 따라 데이터셋 반환하기
@@ -168,7 +168,7 @@ def return_user_temp(user_data, temperature):
 # 인접행렬 생성하기
 def make_adj_matrix(data):
     data_array = np.array([[int(fileid), int(clothID), int(score), int(fname)] for fileid, clothID, score, fname in zip(data.index, data.clothID, data.score, data.fileID)])
-    
+
     data_array[:,0] -= 1 # 0부터 시작하기 위해 1를 뺌
     fileid=int(max(data_array[:, 0])) # fileID 총 갯수
     clothID= int(max(data_array[:, 1]))#  clothID의 총 갯수
@@ -177,7 +177,7 @@ def make_adj_matrix(data):
     adj_matrix=np.zeros(shape, dtype=int)
     for fileid, clothid, score, fname in data_array:
         adj_matrix[int(clothid)][int(fileid)] = int(score)
-    
+
     return adj_matrix
 
 # 코사인 유사도 구하기
@@ -185,7 +185,7 @@ def compute_cos_similarity(v1, v2):
   norm1 = np.sqrt(np.sum(np.square(v1)))
   norm2 = np.sqrt(np.sum(np.square(v2)))
   dot = np.dot(v1, v2)
-  return dot/(norm1*norm2)
+  return (dot/(norm1*norm2))
 
 # 코사인 유사도를 계산하여 최종 TOP10 리스트 반환
 # 거리가 가까울 수록(값이 작을 수록) 선택한 스타일 조건과 유사한 사용자
@@ -212,16 +212,71 @@ def make_recommend_list(adj_matrix, select_data):
     return select_data[(select_data['index'].isin(list(recommend_list)))].sort_values('score', ascending=False).drop_duplicates('clothID')[:10]
 
 # 최종데이터와 유저데이터 비교하여 옷장안의 유무 리스트(파일명) 반환
-def return_match_user_data(final_data, user_data):
+def return_match_list(rec_cat, recommend_data, user_data, origin_data):
+    name_list = []
+    for cat in rec_cat:
+        final_data = origin_data[(origin_data.fileID.isin(recommend_data['fileID'])) & (origin_data.cloth_cat == cat)]
+
+        match_list = []
+        match_fail_list = []
+
+        for fcat, fcolor, fname in zip(final_data.cloth_cat, final_data.color, final_data.fileID):
+            if user_data[(user_data.cloth_cat == fcat) & (user_data.color == fcolor)].empty == False:
+                match_list.append(fname)
+            else:
+                match_fail_list.append(fname)
+
+        # 우선순위 반영하여 재정렬
+        globals()['match_{}'.format(cat)] = [rec_fid for rec_fid in recommend_data.fileID for match in match_list if
+                                             match == rec_fid]
+        globals()['match_fail_{}'.format(cat)] = [rec_fid for rec_fid in recommend_data.fileID for matchfail in
+                                                  match_fail_list if matchfail == rec_fid]
+
+        name_list.append([f'match_{cat}', f'match_fail_{cat}'])
+
+    # 의류 카테고리별 조합하기
     match_list = []
+    for i in range(0, min([len(globals()[a]) for a in [name_list[k][0] for k in range(len(rec_cat))]])):
+        match_list.append([globals()[a][i] for a in [name_list[s][0] for s in range(len(rec_cat))]])
+
     match_fail_list = []
+    for i in range(0, min([len(globals()[a]) for a in [name_list[k][1] for k in range(len(rec_cat))]])):
+        match_fail_list.append([globals()[a][i] for a in [name_list[s][1] for s in range(len(rec_cat))]])
 
-    for fcat, fcolor, fname in zip(final_data.cloth_cat, final_data.color, final_data.fileID):
-        if user_data[(user_data.cloth_cat==fcat)&(user_data.color==fcolor)].empty==False:
-            match_list.append(fname)
-        else:
-            match_fail_list.append(fname)
+    match_df = pd.DataFrame()
+    for i in range(0, len(rec_cat)):
+        for match in match_list[:3]:
+            match_df = match_df.append(origin_data[(origin_data.fileID == match[i]) & (origin_data.cloth_cat == rec_cat[i])])
 
-    return match_list, match_fail_list
+    match_fail_df = pd.DataFrame()
+    for i in range(0, len(rec_cat)):
+        for match_fail in match_fail_list[:3]:
+            match_fail_df = match_fail_df.append(origin_data[(origin_data.fileID == match_fail[i]) & (origin_data.cloth_cat == rec_cat[i])])
 
+    return match_df, match_fail_df
 
+def final_recommend_df(recommmend_data, user_data, origin_data):
+    rec_cat = list(recommmend_data.cloth_cat.unique())
+    match_df = pd.DataFrame()
+    match_fail_df = pd.DataFrame()
+
+    # 원피스의 경우 상의,하의를 대신할 수 있으므로 조건문 처리 진행
+    if ('One-Piece' in rec_cat):  # 원피스가 있고
+        if ('Outer' in rec_cat):  # 아우터가 있는 경우
+            a, b = return_match_list(['Outer', 'One-Piece'], recommmend_data, user_data, origin_data)
+            rec_cat.remove('One-Piece')  # 불필요한 컬럼 삭제
+            match_df, match_fail_df = return_match_list(rec_cat, recommmend_data, user_data, origin_data)
+
+            match_df = match_df.append(a)
+            match_fail_df = match_fail_df.append(b)
+        else:  # 아우터가 없는 경우
+            a, b = return_match_list('One-Piece', recommmend_data, user_data, origin_data)
+            rec_cat.remove('One-Piece')  # 불필요한 컬럼 삭제
+            match_df, match_fail_df = return_match_list(rec_cat, recommmend_data, user_data, origin_data)
+
+            match_df = match_df.append(a)
+            match_fail_df = match_fail_df.append(b)
+    else:  # 원피스가 없는 경우
+        match_df, match_fail_df = return_match_list(rec_cat, recommmend_data, user_data, origin_data)
+
+    return match_df, match_fail_df
