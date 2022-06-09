@@ -67,23 +67,23 @@ def image_preprocess(target_item):
     (B, G, R, A) = cv2.split(new_img)
     (H, S, V) = cv2.split(image_hsv)
 
-    # 최빈값
-    color = defaultdict(int)
-    cnt = 0
-    for i in range(len(A)):
-        for j in range(len(A[0])):
-            if A[i][j]:
-                color[str(H[i][j]) + '-' + str(S[i][j]) + '-' + str(V[i][j])] += 1
-                cnt += 1
-
-    mod_h, mod_s, mod_v = sorted(color.items(), reverse=True, key=lambda item: item[1])[0][0].split('-')
-    mod_h, mod_s, mod_v = int(mod_h), int(mod_s), int(mod_v)
-
-    mod_diff = []
-    for name, chip in zip(color_name, color_chip_hsv):
-        mod_temp = (mod_h - chip[0]) ** 2 + (mod_s - chip[1]) ** 2 + (mod_v - chip[2]) ** 2
-        mod_diff.append(mod_temp)
-    result = color_chip_rgb[mod_diff.index(min(mod_diff))]
+    # # 최빈값
+    # color = defaultdict(int)
+    # cnt = 0
+    # for i in range(len(A)):
+    #     for j in range(len(A[0])):
+    #         if A[i][j]:
+    #             color[str(H[i][j]) + '-' + str(S[i][j]) + '-' + str(V[i][j])] += 1
+    #             cnt += 1
+    #
+    # mod_h, mod_s, mod_v = sorted(color.items(), reverse=True, key=lambda item: item[1])[0][0].split('-')
+    # mod_h, mod_s, mod_v = int(mod_h), int(mod_s), int(mod_v)
+    #
+    # mod_diff = []
+    # for name, chip in zip(color_name, color_chip_hsv):
+    #     mod_temp = (mod_h - chip[0]) ** 2 + (mod_s - chip[1]) ** 2 + (mod_v - chip[2]) ** 2
+    #     mod_diff.append(mod_temp)
+    # result = color_chip_rgb[mod_diff.index(min(mod_diff))]
 
     ## trim
     contours_xy = np.array(contours)

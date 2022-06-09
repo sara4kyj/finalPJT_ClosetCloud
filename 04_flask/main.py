@@ -1,5 +1,6 @@
 # 모듈 호출
 import cv2
+import os
 import pandas as pd
 import numpy as np
 from keras.models import load_model
@@ -22,9 +23,13 @@ def Main():  # 경로에 대한 요청이 있을 때 실행될 함수 정의
 def Aicodi():
     return render_template('Aicodi.html')
 
-@app.route('/SignUp')
-def SignUp():
-    return render_template('SignUp.html')
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+@app.route('/signup')
+def signup():
+    return render_template('signup.html')
 
 @app.route('/productDetail')
 def productDetail():
@@ -41,21 +46,25 @@ def recommendMatch():
 @app.route('/Mycloset')
 def Mycloset():
     user = pd.read_pickle('./static/data/user.pkl')
-    season_dict = {'봄': 0, '여름': 1, '가을': 2, '겨울': 3}
-    unique_season = sorted(list(set(user['season'])), key=lambda x: season_dict[x])
-    unique_color = list(set(user['color']))
-    color_hex = return_hex(unique_color)
+    if user.empty:
+        return render_template('Mycloset.html')
+    else:
+        season_dict = {'봄': 0, '여름': 1, '가을': 2, '겨울': 3}
+        season_list = set(str([ss.replace(' ', ',') for ss in user['season']]).translate(str.maketrans("[ ]'", '    ')).replace(' ', '').split(','))
+        unique_season = sorted(list(set(season_list)), key=lambda x: season_dict[x])
+        unique_color = list(set(user['color']))
+        color_hex = return_hex(unique_color)
 
-    return render_template('Mycloset.html',
-                           unique_season=unique_season,
-                           unique_color=unique_color,
-                           color_hex=color_hex,
-                           fname=list(user.fname),
-                           cloth_cat=list(user.cloth_cat),
-                           color=list(user.color),
-                           season=list(user.season),
-                           favor=list(user.favor),
-                           description=list(user.description))
+        return render_template('Mycloset.html',
+                               unique_season=unique_season,
+                               unique_color=unique_color,
+                               color_hex=color_hex,
+                               fname=list(user.fname),
+                               cloth_cat=list(user.cloth_cat),
+                               color=list(user.color),
+                               season=list(user.season),
+                               favor=list(user.favor),
+                               description=list(user.description))
 @app.route('/StoreCloset')
 def StoreCloset():
     return render_template('StoreCloset.html')
@@ -83,6 +92,7 @@ def StoreCloset():
 @app.route('/StoreproductDetailTemp')
 def StoreproductDetailTemp():
     return render_template('StoreproductDetailTemp.html')
+
 @app.route('/modifystorecloth', methods=['POST'])
 def modifystorecloth():
     # 받아온 데이터의 정보로 기존 데이터 정보 수정하는 코드 짜야함 last_save_date
@@ -129,6 +139,8 @@ def productDetail_upload():
 
         pred_class = class_dict[np.argmax(pred, axis=1)[0]]
 
+        # 모든 예측 로직 사용이 끝났으므로 원본파일 삭제
+        os.remove(f'./static/images/cloths/origin_' + fname +'.png')
         # 가입조건에 따른 조건문 작성 필요
         # 현재 사용자 기준
         return render_template('productDetailTemp.html',
@@ -155,7 +167,7 @@ def clothadd():
         'fname': data['fname'],
         'cloth_cat': data['cloth_cat'],
         'color': data['color'],
-        'season': data['season'],
+        'season': str(data['season']).translate(str.maketrans("[ ]'", '    ')).replace(' ','').replace(',',' '),
         'favor': data['favor'],
         'description': data['description'],
         'input_date': input_date,
@@ -191,6 +203,8 @@ def recommend():
         # 추천해주기
         pyautogui.PAUSE = 15
         user = pd.read_pickle('./static/data/user.pkl')
+        # 선택한 온도 반영한 사용자 데이터 출력하기
+        user = return_user_temp(user,  temperature)
         select_data = create_user_faver(select_data, user)
         select_data = pre_processing_adjmatrix(select_data)
         adj_matrix = make_adj_matrix(select_data)
@@ -198,16 +212,12 @@ def recommend():
         recommend_data = make_recommend_list(adj_matrix, select_data)
 
         # 추천리스트와 사용자 비교하여 보여주기
-        pyautogui.PAUSE = 5
-        match_df, match_fail_df = final_recommend_df(recommend_data, user, data)
-
-        fileID_onCloset_path_list = [f'cloths/{str(user[(user.cloth_cat==mtcat)&(user.color==mtcolor)].fname.unique()[0])}' for mtcat, mtcolor in zip(match_df.cloth_cat, match_df.color)]
-        # fileID_onStore_path_list = [f'cloths/store/{str(store[(store.cloth_cat==mtcat)&(store.color==mtcolor)].fname.unique()[0])'
-        #                             for mtcat, mtcolor in zip(match_fail_df.cloth_cat, match_fail_df.color)]
+        pyautogui.PAUSE = 10
+        match_path, match_fail_path = return_match_path_list(recommend_data, user, data)
 
         return render_template('recommendMatch.html',
-                                fileID_onCloset_path_list=fileID_onCloset_path_list[:3],
-                                fileID_onStore_path_list=fileID_onCloset_path_list)
+                                fileID_onCloset_path_list=match_path,
+                                fileID_onStore_path_list=match_path)
 
 
 if __name__ != '__main__':

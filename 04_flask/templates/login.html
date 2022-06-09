@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Codi Recommendation</title>
+	<title>로그인</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -42,8 +42,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 	<link rel="stylesheet" href="static/css/accordion.css">
 	<link rel="stylesheet" href="static/css/style.css">
-
-
+<!--===============================================================================================-->
 
 </head>
 <body class="animsition">
@@ -120,8 +119,8 @@
 	<section class="sec-blog bg0 p-t-60 p-b-90">
 		<div class="container">
 			<div class="p-b-66">
-				<h3 class="ltext-105 cl5 txt-center respon1">
-					Codi Recommendation
+				<h3 class="ltext-105k cl5 txt-center respon1">
+					로그인
 				</h3>
 			</div>
 
@@ -131,77 +130,71 @@
 			</div>
 
 
-
 			<div class="flex-w flex-sb-m p-b-52" style="flex-direction: column;">
 				<div class="tab_rec flex-c-m m-tb-10" style="margin:0 auto;">
 					<button class="tablinks_rec active cl6 hov-tab2 bor3 trans-04 m-r-32 m-tb-5 how-active1" onclick="openTab(event, 'tab1')">
-						내 옷장 기반
+						개인 사용자
 					</button>
 
 					<button class="tablinks_rec cl6 hov-tab2 bor3 trans-04 m-r-32 m-tb-5" onclick="openTab(event, 'tab2')">
-						스토어 기반
+						소상공인
 					</button>
 				</div>
 			</div>
 
 			<div id="tab1" class="tabcontent" style="display: block; margin:0 auto;">
 
-				{% for onCloset in fileID_onCloset_path_list %}
 				<div class="row recommend_image" style="margin:0 auto;">
-
-					{% for image in onCloset %}
-
-					<div class="col-xl-3 p-b-35">
-							<!-- Block2 -->
-							<div class="block2">
-								<div class="block2-pic hov-img0">
-									<img src="static/images/{{image}}" alt="IMG-PRODUCT">
-								</div>
-
-								<div class="block2-txt flex-w flex-t p-t-14">
-									<div class="block2-txt-child2 flex-r p-t-3">
-										<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-											<img class="icon-heart1 dis-block trans-04" src="static/images/icons/icon-heart-01.png" alt="ICON">
-											<img class="icon-heart2 dis-block trans-04 ab-t-l" src="static/images/icons/icon-heart-02.png" alt="ICON">
-										</a>
-									</div>
-								</div>
-							</div>
+					<ul>
+						<div class="p-t-18">
+							<button class="flex-c-m stext-101k cl14 size-kakao bg10 hov-kakaobtn p-lr-15 trans-04" onclick="kakaoLogin();">
+								<img class="size-108" src="static/images/icons/kakao.png" alt="ICON">
+								카카오계정으로 로그인
+							</button>
 						</div>
 
-					{% endfor %}
-					</div>
-				{% endfor %}
+						<div class="p-t-18">
+							<button class="flex-c-m stext-101k cl14 size-kakao bg10 hov-kakaobtn p-lr-15 trans-04" onclick="kakaoLogin();">
+								<img class="size-108" src="static/images/icons/kakao.png" alt="ICON">
+								카카오계정으로 회원가입
+							</button>
+						</div>
 
-
+						<div class="flex-c-m p-t-12">
+							<a href="/signup" class="flex-c-m stext-106k size-104 bor4 pointer hov-btn4 trans-04 p-lr-15 m-tb-4">회원가입</a>
+						</div>
+						<!-- 추후 주석 처리하거나 필요한 곳으로 이동 -->
+						<li onclick="kakaoLogout();">
+						  <a href="javascript:void(0)">
+							  <span>카카오 로그아웃</span>
+						  </a>
+						</li>
+					</ul>
+				</div>
 			</div>
 
 			<div id="tab2" class="tabcontent" style="display: none; margin:0 auto;">
-
-				<div class="row recommend_image" style="margin:0 auto;">
-
-					{% for onStore in fileID_onStore_path_list %}
-					<div class="col-sm-6 col-md-4 col-lg-3 p-b-35">
-						<!-- Block2 -->
-						<div class="block2">
-							<div class="block2-pic hov-img0">
-								<img src="static/images/{{onStore}}" alt="IMG-PRODUCT">
-							</div>
-
-							<div class="block2-txt flex-w flex-t p-t-14">
-								<div class="block2-txt-child2 flex-r p-t-3">
-									<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-										<img class="icon-heart1 dis-block trans-04" src="static/images/icons/icon-heart-01.png" alt="ICON">
-										<img class="icon-heart2 dis-block trans-04 ab-t-l" src="static/images/icons/icon-heart-02.png" alt="ICON">
-									</a>
-								</div>
+				<div style="margin: 0 25% 0 25%;">
+					<form>
+						<div class="form-group row">
+							<label for="inputEmail" class="col-sm-2 col-form-label">아이디</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="inputEmail" placeholder="아이디를 입력해주세요.">
 							</div>
 						</div>
-					</div>
-					{% endfor %}
+						<div class="form-group row">
+							<label for="inputPassword" class="col-sm-2 col-form-label">비밀번호</label>
+							<div class="col-sm-10">
+								<input type="password" class="form-control" id="inputPassword" placeholder="비밀번호를 입력해주세요.">
+							</div>
+						</div>
+						<div class="flex-c-m p-t-12">
+							<button type="submit" class="flex-c-m stext-106k size-104 bor4 pointer hov-btn4 trans-04 p-lr-15 m-tb-4 m-r-10">로그인</button>
 
+							<a href="/signup" class="flex-c-m stext-106k size-104 bor4 pointer hov-btn4 trans-04 p-lr-15 m-tb-4">회원가입</a>
+						</div>
+					</form>
 				</div>
-
 			</div>
 		</div>
 	</section>
@@ -366,9 +359,70 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		</div>
 	</footer>
 
+<!--=====사업자 번호 진위 확인=================================================================================-->
+	<script>
 
+		var data = {
+			"b_no": ["xxxxxxx"] // 사업자번호 "xxxxxxx" 로 조회 시,
+		   };
 
+		$.ajax({
+		  url: "https://api.odcloud.kr/api/nts-businessman/v1/status?serviceKey=xxxxxx",  // serviceKey 값을 xxxxxx에 입력
+		  type: "POST",
+		  data: JSON.stringify(data), // json 을 string으로 변환하여 전송
+		  dataType: "JSON",
+		  contentType: "application/json",
+		  accept: "application/json",
+		  success: function(result) {
+			  console.log(result);
+		  },
+		  error: function(result) {
+			  console.log(result.responseText); //responseText의 에러메세지 확인
+		  }
+		});
 
+	</script>
+
+<!--=====카카오 회원가입==================================================================================-->
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script>
+	Kakao.init('ff8f06cc22daaa108c4338bcc2c8635b'); //발급받은 키 중 javascript키를 사용해준다.
+	console.log(Kakao.isInitialized()); // sdk초기화여부판단
+	//카카오로그인
+	function kakaoLogin() {
+		Kakao.Auth.login({
+		  success: function (response) {
+			Kakao.API.request({
+			  url: '/v2/user/me',
+			  success: function (response) {
+				  console.log(response)
+			  },
+			  fail: function (error) {
+				console.log(error)
+			  },
+			})
+		  },
+		  fail: function (error) {
+			console.log(error)
+		  },
+		})
+	  }
+	//카카오로그아웃
+	function kakaoLogout() {
+		if (Kakao.Auth.getAccessToken()) {
+		  Kakao.API.request({
+			url: '/v1/user/unlink',
+			success: function (response) {
+				console.log(response)
+			},
+			fail: function (error) {
+			  console.log(error)
+			},
+		  })
+		  Kakao.Auth.setAccessToken(undefined)
+		}
+	  }
+</script>
 <!--=====탭 기능 구현==================================================================================-->
 	<script>
 	function openTab(evt, tabName) {

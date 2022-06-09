@@ -2713,6 +2713,11 @@ input.num-product::-webkit-inner-spin-button {
   height: 40px;
 }
 
+.size-kakao {
+  min-width: 230px;
+  height: 45px;
+}
+
 /*//////////////////////////////////////////////////////////////////
 [ Width ]*/
 .size-201 {

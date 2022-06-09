@@ -72,7 +72,7 @@
 					</div>
 
 					<div class="wrap-icon-header flex-w flex-r-m">
-						<a href="/SignUp" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+						<a href="/login" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
 							<i class="zmdi zmdi-account-o"></i>
 						</a>
 					</div>
@@ -88,12 +88,10 @@
 			</div>
 
 			<div class="wrap-icon-header flex-w flex-r-m m-r-15">
-				<a href="/SignUp" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10">
+				<a href="/login" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10">
 					<i class="zmdi zmdi-account-o"></i>
 				</a>
 			</div>
-
-
 
 			<!-- Button show menu -->
 			<div class="btn-show-menu-mobile hamburger hamburger--squeeze">
@@ -208,19 +206,19 @@
 
 								<div class="size-204 respon70-next">
 									<label class="add-cloth-button stext-104k">
-										<input type="radio" name="season" value="봄" style="display:none" />
+										<input type="checkbox" name="season" value="봄" style="display:none" />
 										<span class="add-cloth-onoff-switch">봄</span>
 									</label>
 									<label class="add-cloth-button stext-104k">
-										<input type="radio" name="season" value="여름" style="display:none" />
+										<input type="checkbox" name="season" value="여름" style="display:none" />
 										<span class="add-cloth-onoff-switch">여름</span>
 									</label>
 									<label class="add-cloth-button stext-104k">
-										<input type="radio" name="season" value="가을" style="display:none" />
+										<input type="checkbox" name="season" value="가을" style="display:none" />
 										<span class="add-cloth-onoff-switch">가을</span>
 									</label>
 									<label class="add-cloth-button stext-104k">
-										<input type="radio" name="season" value="겨울" style="display:none" />
+										<input type="checkbox" name="season" value="겨울" style="display:none" />
 										<span class="add-cloth-onoff-switch">겨울</span>
 									</label>
 								</div>
@@ -446,7 +444,11 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		var fname = $('#fname').val();
 		var cloth_cat = $('#cloth_cat').val();
 		var color_cat = $('#color_cat').val();
-		var Season = $("input:radio[name='season']:checked").val();
+		var Season = [];
+
+        $("input[name='season']:checked").each(function(i) {
+       		 Season.push($(this).val());
+        });
 		var Favor = $("input:radio[name='favor']:checked").val();
 		var Description = $('#Description').val();
 

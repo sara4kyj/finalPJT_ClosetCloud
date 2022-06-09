@@ -44,7 +44,7 @@ def select_temperature(data, temperature):
         arm_length_list = ['7부소매','긴팔','반팔',None]
     elif temperature in range(20,23):
         fabric_list = ['린넨', '데님','시폰']
-        cloth_cat_list = ['Top', 'Bottom','Outer', 'One-Piece']
+        cloth_cat_list = ['Top', 'Bottom', 'Outer', 'One-Piece']
         arm_length_list = ['7부소매','긴팔','반팔',None]
     elif temperature in range(23,28):
         fabric_list = ['린넨', '데님','메시','스판덱스']
@@ -139,7 +139,7 @@ def select_style(data, select_style_list, select_situation):
 # 사용자 선호도 반영한 데이터셋 반환하는 함수
 def create_user_faver(data, user_data):
     for user_cloth, user_color, user_score in zip(user_data.cloth_cat, user_data.color, user_data.favor):
-        data.loc[((data.cloth_cat == user_cloth) & (data.color == user_color)), 'score'] += int(user_score)
+        data.loc[((data.cloth_cat == user_cloth) & (data.color == user_color)), 'score'] += float(user_score)
     return data
 
 def pre_processing_adjmatrix(data):
@@ -158,12 +158,12 @@ def pre_processing_adjmatrix(data):
 
 # 사용자 데이터 중 선택된 온도에 따라 데이터셋 반환하기
 def return_user_temp(user_data, temperature):
-    if temperature < 10:
-        return user_data[user_data.season == '겨울']
-    elif temperature in range(10,24):
-        return user_data[(user_data.season == '봄')|(user_data.season == '가을')]
-    elif temperature > 24:
-        return user_data[user_data.season == '여름']
+    if float(temperature) < 10:
+        return user_data[user_data['season'].str.contains('겨울')]
+    elif float(temperature) in range(10,24):
+        return user_data[(user_data['season'].str.contains('봄'))|(user_data['season'].str.contains('가을'))]
+    elif float(temperature) >= 24:
+        return user_data[user_data['season'].str.contains('여름')]
 
 # 인접행렬 생성하기
 def make_adj_matrix(data):
@@ -212,25 +212,24 @@ def make_recommend_list(adj_matrix, select_data):
     return select_data[(select_data['index'].isin(list(recommend_list)))].sort_values('score', ascending=False).drop_duplicates('clothID')[:10]
 
 # 최종데이터와 유저데이터 비교하여 옷장안의 유무 리스트(파일명) 반환
-def return_match_list(rec_cat, recommend_data, user_data, origin_data):
+def make_match_path(rec_cat, recommend_data, user_data, origin_data): # store_data 입력값 추가 필요
     name_list = []
+
     for cat in rec_cat:
-        final_data = origin_data[(origin_data.fileID.isin(recommend_data['fileID'])) & (origin_data.cloth_cat == cat)]
+        final_data = origin_data[(origin_data.fileID.isin(recommend_data['fileID'])) & (origin_data.cloth_cat==cat)]
 
         match_list = []
         match_fail_list = []
 
         for fcat, fcolor, fname in zip(final_data.cloth_cat, final_data.color, final_data.fileID):
-            if user_data[(user_data.cloth_cat == fcat) & (user_data.color == fcolor)].empty == False:
+            if user_data[(user_data.cloth_cat==fcat)&(user_data.color==fcolor)].empty==False:
                 match_list.append(fname)
             else:
                 match_fail_list.append(fname)
 
         # 우선순위 반영하여 재정렬
-        globals()['match_{}'.format(cat)] = [rec_fid for rec_fid in recommend_data.fileID for match in match_list if
-                                             match == rec_fid]
-        globals()['match_fail_{}'.format(cat)] = [rec_fid for rec_fid in recommend_data.fileID for matchfail in
-                                                  match_fail_list if matchfail == rec_fid]
+        globals()['match_{}'.format(cat)] = [rec_fid for rec_fid in recommend_data.fileID for match in match_list if match==rec_fid]
+        globals()['match_fail_{}'.format(cat)] = [rec_fid for rec_fid in recommend_data.fileID for matchfail in match_fail_list if matchfail==rec_fid]
 
         name_list.append([f'match_{cat}', f'match_fail_{cat}'])
 
@@ -243,40 +242,48 @@ def return_match_list(rec_cat, recommend_data, user_data, origin_data):
     for i in range(0, min([len(globals()[a]) for a in [name_list[k][1] for k in range(len(rec_cat))]])):
         match_fail_list.append([globals()[a][i] for a in [name_list[s][1] for s in range(len(rec_cat))]])
 
-    match_df = pd.DataFrame()
-    for i in range(0, len(rec_cat)):
-        for match in match_list[:3]:
-            match_df = match_df.append(origin_data[(origin_data.fileID == match[i]) & (origin_data.cloth_cat == rec_cat[i])])
+    # 조합한 의류데이터 순으로 의류 경로 리스트 제작하기
+    match_path_list = []
+    for match in match_list[:3]:
+        match_df = pd.DataFrame()
+        for i in range(0, len(rec_cat)):
+            match_df = pd.concat([match_df, origin_data[(origin_data.fileID==match[i]) & (origin_data.cloth_cat==rec_cat[i])]])
+        try: match_path_list.append([f'cloths/{str(user_data[(user_data.cloth_cat==mtcat)&(user_data.color==mtcolor)].fname.unique()[0])}' for mtcat, mtcolor in zip(match_df.cloth_cat, match_df.color)])
+        except: pass
 
-    match_fail_df = pd.DataFrame()
-    for i in range(0, len(rec_cat)):
-        for match_fail in match_fail_list[:3]:
-            match_fail_df = match_fail_df.append(origin_data[(origin_data.fileID == match_fail[i]) & (origin_data.cloth_cat == rec_cat[i])])
 
-    return match_df, match_fail_df
+    match_fail_path_list = []
+    # for match_fail in match_fail_list[:3]:
+    #     match_fail_df = pd.DataFrame()
+    #     for i in range(0, len(rec_cat)):
+    #         match_fail_df = pd.concat([match_fail_df, origin_data[(origin_data.fileID==match_fail[i]) & (origin_data.cloth_cat==rec_cat[i])]])
+    #     try: match_path_list.append([f'cloths/{str(store_data[(store_data.cloth_cat==mtfcat)&(user_data.color==mtfcolor)].fname.unique()[0])}' for mtfcat, mtfcolor in zip(match_fail_df.cloth_cat, match_fail_df.color)])
+    #     except: pass
+    #
+    return match_path_list, match_fail_path_list
 
-def final_recommend_df(recommmend_data, user_data, origin_data):
-    rec_cat = list(recommmend_data.cloth_cat.unique())
-    match_df = pd.DataFrame()
-    match_fail_df = pd.DataFrame()
+def return_match_path_list(recommend_data, user_data, origin_data): # store_data 입력값 추가 필요
+    rec_cat = list(recommend_data.cloth_cat.unique())
+    match_path_list = []
+    match_fail_path_list = []
 
     # 원피스의 경우 상의,하의를 대신할 수 있으므로 조건문 처리 진행
     if ('One-Piece' in rec_cat):  # 원피스가 있고
         if ('Outer' in rec_cat):  # 아우터가 있는 경우
-            a, b = return_match_list(['Outer', 'One-Piece'], recommmend_data, user_data, origin_data)
+            a, b = make_match_path(['Outer', 'One-Piece'], recommend_data, user_data, origin_data)
             rec_cat.remove('One-Piece')  # 불필요한 컬럼 삭제
-            match_df, match_fail_df = return_match_list(rec_cat, recommmend_data, user_data, origin_data)
+            match_path_list, match_fail_path_list = make_match_path(rec_cat, recommend_data, user_data, origin_data)
 
-            match_df = match_df.append(a)
-            match_fail_df = match_fail_df.append(b)
+            match_path_list = match_path_list + a
+            match_fail_path_list = match_fail_path_list + b
         else:  # 아우터가 없는 경우
-            a, b = return_match_list('One-Piece', recommmend_data, user_data, origin_data)
+            a, b = make_match_path('One-Piece', recommend_data, user_data, origin_data)
             rec_cat.remove('One-Piece')  # 불필요한 컬럼 삭제
-            match_df, match_fail_df = return_match_list(rec_cat, recommmend_data, user_data, origin_data)
+            match_path_list, match_fail_path_list = make_match_path(rec_cat, recommend_data, user_data, origin_data)
 
-            match_df = match_df.append(a)
-            match_fail_df = match_fail_df.append(b)
+            match_path_list = match_path_list + a
+            match_fail_path_list = match_fail_path_list + b
     else:  # 원피스가 없는 경우
-        match_df, match_fail_df = return_match_list(rec_cat, recommmend_data, user_data, origin_data)
+        match_path_list, match_fail_path_list = make_match_path(rec_cat, recommend_data, user_data, origin_data)
 
-    return match_df, match_fail_df
+    return match_path_list, match_fail_path_list
