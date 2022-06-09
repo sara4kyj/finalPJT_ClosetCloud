@@ -12,8 +12,6 @@
 
 ## [팀 구성]
 
-![팀구성도](https://github.com/sara4kyj/finalPJT_ClosetCloud/blob/d1066c3a8ccfcba2eb54f528794250975a2fb117/_document/Untitled.png)
-
 - 팀장 : 김유정
   - 노션 페이지 및 Github 관리
   - 데이터 전처리
