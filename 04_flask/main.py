@@ -27,9 +27,9 @@ def Aicodi():
 def login():
     return render_template('login.html')
 
-@app.route('/signup')
-def signup():
-    return render_template('signup.html')
+@app.route('/signupStore')
+def signupStore():
+    return render_template('signupStore.html')
 
 @app.route('/productDetail')
 def productDetail():

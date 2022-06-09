@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>로그인</title>
+	<title>회원가입</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -115,12 +115,11 @@
 
 	</header>
 
-
 	<section class="sec-blog bg0 p-t-60 p-b-90">
 		<div class="container">
 			<div class="p-b-66">
 				<h3 class="ltext-105k cl5 txt-center respon1">
-					로그인
+					판매자 회원가입
 				</h3>
 			</div>
 
@@ -129,71 +128,67 @@
 				<br></a>
 			</div>
 
+			<div style="margin: 0 12% 0 15%;">
+				<div class="mt-3 container store-signup">
+					<div class="Confirm-business-number" style="margin: 0 13% 0 10%;">
+						<p class="center mtext-kbiz cl6 bor3 m-tb-5 p-b-20">사업자 등록번호</p>
 
-			<div class="flex-w flex-sb-m p-b-52" style="flex-direction: column;">
-				<div class="tab_rec flex-c-m m-tb-10" style="margin:0 auto;">
-					<button class="tablinks_rec active cl6 hov-tab2 bor3 trans-04 m-r-32 m-tb-5 how-active1" onclick="openTab(event, 'tab1')">
-						개인 사용자
-					</button>
-
-					<button class="tablinks_rec cl6 hov-tab2 bor3 trans-04 m-r-32 m-tb-5" onclick="openTab(event, 'tab2')">
-						소상공인
-					</button>
-				</div>
-			</div>
-
-			<div id="tab1" class="tabcontent" style="display: block; margin:0 auto;">
-
-				<div class="row recommend_image" style="margin:0 auto;">
-					<ul>
-						<div class="p-t-18">
-							<button class="flex-c-m stext-101k cl14 size-kakao bg10 hov-kakaobtn p-lr-15 trans-04" onclick="kakaoLogin();">
-								<img class="size-108" src="static/images/icons/kakao.png" alt="ICON">
-								카카오계정으로 로그인
-							</button>
-						</div>
-
-						<div class="p-t-18">
-							<button class="flex-c-m stext-101k cl14 size-kakao bg10 hov-kakaobtn p-lr-15 trans-04" onclick="kakaoLogin();">
-								<img class="size-108" src="static/images/icons/kakao.png" alt="ICON">
-								카카오계정으로 회원가입
-							</button>
+						<div class="input-group flex-w flex-r-m p-b-10">
+							<input type="text" class="form-control stext-104k plh3 p-lr-18 size-204 respon70-next" style="height: 50px;" placeholder="사업자 등록번호를 입력해주세요." id="business_num" name="business_num">
 						</div>
 
 						<div class="flex-c-m p-t-12">
-							<a href="/signup" class="flex-c-m stext-106k size-104 bor4 pointer hov-btn4 trans-04 p-lr-15 m-tb-4">회원가입</a>
+							<button id="certify" onclick="Confirm();" class="flex-c-m stext-106k size-104 bor4 pointer hov-btn4 trans-04 p-lr-15 m-tb-4 m-r-10">인증</button>
 						</div>
-						<!-- 추후 주석 처리하거나 필요한 곳으로 이동 -->
-						<li onclick="kakaoLogout();">
-						  <a href="javascript:void(0)">
-							  <span>카카오 로그아웃</span>
-						  </a>
-						</li>
-					</ul>
-				</div>
-			</div>
+					</div>
 
-			<div id="tab2" class="tabcontent" style="display: none; margin:0 auto;">
-				<div style="margin: 0 25% 0 25%;">
-					<form>
+					<div class="input-business-info" style="display:none">
 						<div class="form-group row">
-							<label for="inputEmail" class="col-sm-2 col-form-label">아이디</label>
+							<label for="inputID" class="col-sm-2 col-form-label">아이디</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="inputEmail" placeholder="아이디를 입력해주세요.">
+								<input type="text" class="form-control" id="inputID" placeholder="아이디를 입력해주세요.">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="inputPassword" class="col-sm-2 col-form-label">비밀번호</label>
+							<label for="inputPassword1" class="col-sm-2 col-form-label">비밀번호</label>
 							<div class="col-sm-10">
-								<input type="password" class="form-control" id="inputPassword" placeholder="비밀번호를 입력해주세요.">
+								<input type="password" class="form-control" id="inputPassword1" placeholder="비밀번호를 입력해주세요.">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="inputPassword2" class="col-sm-2 col-form-label">비밀번호 확인</label>
+							<div class="col-sm-10">
+								<input type="password" class="form-control" id="inputPassword2" placeholder="비밀번호를 입력해주세요.">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="phone_num" class="col-sm-2 col-form-label">핸드폰번호</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="phone_num" placeholder="핸드폰번호를 입력해주세요.">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="inputEmail" class="col-sm-2 col-form-label">이메일</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="inputEmail" placeholder="이메일를 입력해주세요.">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="inputbusiness_num" class="col-sm-2 col-form-label">사업자등록번호</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="inputbusiness_num" placeholder="사업자등록번호을 입력해주세요.">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="inputAddress" class="col-sm-2 col-form-label">주소</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="inputAddress" placeholder="주소를 입력해주세요.">
 							</div>
 						</div>
 						<div class="flex-c-m p-t-12">
-							<button type="submit" class="flex-c-m stext-106k size-104 bor4 pointer hov-btn4 trans-04 p-lr-15 m-tb-4 m-r-10">로그인</button>
-
-							<a href="/signupStore" class="flex-c-m stext-106k size-104 bor4 pointer hov-btn4 trans-04 p-lr-15 m-tb-4">회원가입</a>
+							<button type="button" onclick="signup()" class="flex-c-m stext-106k size-104 bor4 pointer hov-btn4 trans-04 p-lr-15 m-tb-4 m-r-10">가입하기</button>
 						</div>
-					</form>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -359,85 +354,91 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		</div>
 	</footer>
 
-<!--=====사업자 번호 진위 확인=================================================================================-->
-	<script>
 
-		var data = {
-			"b_no": ["xxxxxxx"] // 사업자번호 "xxxxxxx" 로 조회 시,
-		   };
 
-		$.ajax({
-		  url: "https://api.odcloud.kr/api/nts-businessman/v1/status?serviceKey=xxxxxx",  // serviceKey 값을 xxxxxx에 입력
-		  type: "POST",
-		  data: JSON.stringify(data), // json 을 string으로 변환하여 전송
-		  dataType: "JSON",
-		  contentType: "application/json",
-		  accept: "application/json",
-		  success: function(result) {
-			  console.log(result);
-		  },
-		  error: function(result) {
-			  console.log(result.responseText); //responseText의 에러메세지 확인
-		  }
-		});
+<!--====비밀번호 확인===================================================================================-->
 
-	</script>
+ <script type="text/javascript">
+    function signup() {
+      var p1 = $('#inputPassword1').val()
+      var p2 = $('#inputPassword2').val()
 
-<!--=====카카오 회원가입==================================================================================-->
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<script>
-	Kakao.init('ff8f06cc22daaa108c4338bcc2c8635b'); //발급받은 키 중 javascript키를 사용해준다.
-	console.log(Kakao.isInitialized()); // sdk초기화여부판단
-	//카카오로그인
-	function kakaoLogin() {
-		Kakao.Auth.login({
-		  success: function (response) {
-			Kakao.API.request({
-			  url: '/v2/user/me',
-			  success: function (response) {
-				  console.log(response)
-			  },
-			  fail: function (error) {
-				console.log(error)
-			  },
+      if(p1.length < 6) {
+              Swal.fire({
+					icon: 'error',
+					title: '다시 입력해주세요.',
+					text: '비밀번호는 6글자 이상이어야 합니다.',
+				})
+              return false;
+          }
+
+          if( p1 != p2 ) {
+            Swal.fire({
+				icon: 'error',
+				title: '비밀번호 불일치',
+				text: '다시 입력해주세요.',
 			})
-		  },
-		  fail: function (error) {
-			console.log(error)
-		  },
-		})
-	  }
-	//카카오로그아웃
-	function kakaoLogout() {
-		if (Kakao.Auth.getAccessToken()) {
-		  Kakao.API.request({
-			url: '/v1/user/unlink',
-			success: function (response) {
-				console.log(response)
-			},
-			fail: function (error) {
-			  console.log(error)
-			},
-		  })
-		  Kakao.Auth.setAccessToken(undefined)
-		}
-	  }
-</script>
-<!--=====탭 기능 구현==================================================================================-->
+            return false;
+          } else{
+            Swal.fire({
+				icon: 'success',
+				title: '가입을 완료했습니다.',
+				text: '다음 화면에서 로그인해주세요.',
+			}).then(function(){
+				location.href='/login';
+			})
+            return true;
+          }
+    }
+  </script>
+
+<!--=====사업자 번호 진위 확인=================================================================================-->
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+		crossorigin="anonymous"></script>
+	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 	<script>
-	function openTab(evt, tabName) {
-		  var i, tabcontent, tablinks;
-		  tabcontent = document.getElementsByClassName("tabcontent");
-		  for (i = 0; i < tabcontent.length; i++) {
-			tabcontent[i].style.display = "none";
-		  }
-		  tablinks = document.getElementsByClassName("tablinks_rec");
-		  for (i = 0; i < tablinks.length; i++) {
-			tablinks[i].className = tablinks[i].className.replace(" active", "");
-		  }
-		  document.getElementById(tabName).style.display = "block";
-		  evt.currentTarget.className += " active";
-	}
+
+		function Confirm() {
+			var data = {
+				"b_no": [ $('#business_num').val() ]
+			   };
+
+			$.ajax({
+			  url: "https://api.odcloud.kr/api/nts-businessman/v1/status?serviceKey=UXpFQjQ3zQgKTMz5xCF0szSMjX9hvql8guK1Ug/Rrzu8rE5geBlEGJDq7UdVCyzbIes61SPUy0PfIGcZcL452A==",  // serviceKey 값을 xxxxxx에 입력
+			  type: "POST",
+			  data: JSON.stringify(data), // json 을 string으로 변환하여 전송
+			  dataType: "JSON",
+			  contentType: "application/json",
+			  accept: "application/json",
+			  success: function(result) {
+				  console.log(result);
+				  if (!result.match_cnt) {
+				  	Swal.fire({
+						icon: 'error',
+						title: '조회에 실패했습니다.',
+						text: '잘못 입력한 값은 없는지 확인해주세요.',
+					})
+				  }
+				  else {
+				  	Swal.fire({
+						icon: 'success',
+						title: '조회에 성공했습니다.',
+						text: '다음 화면에서 추가 정보를 입력해주세요.',
+					})
+				  	$('.Confirm-business-number').hide();
+				  	$('.input-business-info').show();
+				  	$('#inputbusiness_num').attr('value', data['b_no']);
+				  }
+			  },
+			  error: function(result) {
+				  console.log(result.responseText); //responseText의 에러메세지 확인
+			  }
+			});
+		}
+
 	</script>
 <!--===============================================================================================-->
 	<script src="static/vendor/jquery/jquery-3.2.1.min.js"></script>

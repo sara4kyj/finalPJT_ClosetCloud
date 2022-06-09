@@ -13,6 +13,14 @@ body {
       background-color: #f6f7fa;
   }
 
+.store-signup {
+      padding: 7% 3%;
+      margin: 0 auto;
+      border-radius: 10px;
+      border: solid 1.5px #f6f7fa;
+      background-color: #f6f7fa;
+  }
+
 .bottom-center {
     position: absolute;
     right: 16px;
