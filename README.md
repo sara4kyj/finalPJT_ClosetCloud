@@ -43,6 +43,6 @@
 
 ## [프로젝트 결과]
 
-![image-20220624013948289](README.assets/image-20220624013948289.png)
+![image-20220624013948289](_document/image-20220624013948289.png)
 
 https://youtu.be/IU63oEg1n6s
