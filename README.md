@@ -22,7 +22,7 @@
 ### 2.1 시스템 구성도
 ![시스템구성도.png](_document/시스템구성도.png)
 
-### [2.1. AI 옷장 관리](https://github.com/sara4kyj/finalPJT_ClosetCloud/blob/80a87b26f639850c02b86a679666450c000488cf/04_flask/cloth_image_preprocessing.py)
+### [2.2. AI 옷장 관리](https://github.com/sara4kyj/finalPJT_ClosetCloud/blob/80a87b26f639850c02b86a679666450c000488cf/04_flask/cloth_image_preprocessing.py)
 ![의류 분류.png](_document/의류분류.png)
 - OpenCV를 사용하여 촬영한 사진의 배경 제거를 통해 의류 색상 추출 및 분류 정확도 향상 
 - K-mean cluster를 사용하여 최빈값을 가진 색상 반환 
